@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -97,10 +98,54 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Search" id="DFB-En-ExD"/>
+                    <connections>
+                        <segue destination="qpU-fd-C2x" kind="show" identifier="ToPDFViewController" id="bZR-BV-uxf"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V5G-G8-z8x" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="223.18840579710147" y="70.982142857142847"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="1Yj-Pn-cHJ">
+            <objects>
+                <viewController id="qpU-fd-C2x" customClass="PDFViewController" customModule="TestAppForItInnovations" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="x93-cS-SyC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SPy-8Q-nZN">
+                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="VOy-Y8-qzG">
+                                <rect key="frame" x="197" y="438" width="20" height="20"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="VOy-Y8-qzG" firstAttribute="centerY" secondItem="x93-cS-SyC" secondAttribute="centerY" id="7uu-BE-mAq"/>
+                            <constraint firstItem="SPy-8Q-nZN" firstAttribute="trailing" secondItem="MX9-Wh-Fxa" secondAttribute="trailing" id="OOR-P1-yq2"/>
+                            <constraint firstItem="SPy-8Q-nZN" firstAttribute="top" secondItem="MX9-Wh-Fxa" secondAttribute="top" id="Tcf-zE-vaU"/>
+                            <constraint firstAttribute="bottom" secondItem="SPy-8Q-nZN" secondAttribute="bottom" id="bN5-Rk-WUS"/>
+                            <constraint firstItem="VOy-Y8-qzG" firstAttribute="centerX" secondItem="x93-cS-SyC" secondAttribute="centerX" id="l9j-CI-D8x"/>
+                            <constraint firstItem="SPy-8Q-nZN" firstAttribute="leading" secondItem="MX9-Wh-Fxa" secondAttribute="leading" id="p4w-2P-POb"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="MX9-Wh-Fxa"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="AtT-hz-8pL"/>
+                    <connections>
+                        <outlet property="activityIndicator" destination="VOy-Y8-qzG" id="xLM-d3-Q4T"/>
+                        <outlet property="webView" destination="SPy-8Q-nZN" id="JcX-5j-OiN"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EMb-eo-pw8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1226.0869565217392" y="383.70535714285711"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="uYZ-ae-sUN">
