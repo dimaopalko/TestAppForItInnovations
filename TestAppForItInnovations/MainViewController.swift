@@ -44,7 +44,7 @@ class MainViewController: UITableViewController, PersonCellDelegate {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! PersonTableViewCell
-        cell.fullNameLabel?.text = personsList[indexPath.row].firstName! + " " + personsList[indexPath.row].lastName!
+        cell.fullNameLabel?.text = (personsList[indexPath.row].firstName ?? "") + " " + (personsList[indexPath.row].lastName ?? "")
         cell.placeOfWorkLabel.text = personsList[indexPath.row].plaseOfWork ?? "No Place Of Work"
         cell.positionLabel.text = personsList[indexPath.row].position ?? "No Position"
         if personsList[indexPath.row].linkPDF == nil {

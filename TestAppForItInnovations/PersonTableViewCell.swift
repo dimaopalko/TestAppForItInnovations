@@ -9,7 +9,6 @@
 import UIKit
 
 protocol PersonCellDelegate: class {
-
   func PDFButtonClickAtIndex(index : Int)
 }
 
@@ -21,10 +20,9 @@ class PersonTableViewCell: UITableViewCell {
     @IBOutlet weak var PDFButtonOutlet: UIButton!
     @IBOutlet weak var placeOfWorkLabel: UILabel!
     @IBOutlet weak var positionLabel: UILabel!
-   
+    
     @IBAction func favoriteButtonTapped(_ sender: Any) {
         print("Favourite button tapped")
-        
     }
     
     @IBAction func PDFButtonTapped(_ sender: Any) {

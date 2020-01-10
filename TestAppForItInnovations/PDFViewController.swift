@@ -22,7 +22,7 @@ class PDFViewController: UIViewController, WKNavigationDelegate {
     }
     
     private func downloadPDFFile(link: String) {
-        let url: URL! = URL(string: link)
+        guard let url = URL(string: link) else { return }
         webView.load(URLRequest(url: url))
     }
     
