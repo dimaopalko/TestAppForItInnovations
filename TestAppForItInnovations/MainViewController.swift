@@ -9,8 +9,6 @@
 import UIKit
 
 class MainViewController: UITableViewController, PersonCellDelegate {
-    
-    
 
     private let networkService = NetworkService()
     private var personsList = [Person]()
@@ -27,7 +25,6 @@ class MainViewController: UITableViewController, PersonCellDelegate {
         searchController.searchBar.delegate = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search"
-        searchController.searchBar.searchTextField.keyboardType = .default
         navigationItem.searchController = searchController
     }
     
@@ -40,6 +37,7 @@ class MainViewController: UITableViewController, PersonCellDelegate {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return personsList.count
     }
+    
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 90
     }
@@ -60,7 +58,8 @@ class MainViewController: UITableViewController, PersonCellDelegate {
     }
     
     func PDFButtonClickAtIndex(index: Int) {
-        linkToDownloadPDF = personsList[index].linkPDF!
+        guard let unwrappedLink = personsList[index].linkPDF else { return }
+        linkToDownloadPDF = unwrappedLink
         performSegue(withIdentifier: "ToPDFViewController", sender: self)
     }
     
@@ -68,7 +67,6 @@ class MainViewController: UITableViewController, PersonCellDelegate {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
     }
     
     // MARK: - Navigation
@@ -85,20 +83,23 @@ class MainViewController: UITableViewController, PersonCellDelegate {
 // MARK: - Search Bar delegate
 
 extension MainViewController: UISearchBarDelegate {
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         print(searchText)
         networkService.fetchPersons(searchText: searchText) { [weak self] (SearchResponce) in
-            if SearchResponce != nil {
-                self?.personsList = SearchResponce?.persons ?? []
-                DispatchQueue.main.async {
-                    self?.tableView.reloadData()
-                }
-            } else {
+            
+            guard let searchResponce = SearchResponce else {
                 self?.personsList = []
                 DispatchQueue.main.async {
                     self?.tableView.reloadData()
                 }
+                return
+            }
+            self?.personsList = searchResponce.persons
+            DispatchQueue.main.async {
+                self?.tableView.reloadData()
             }
         }
     }
 }
+
